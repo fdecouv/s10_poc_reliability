@@ -9,12 +9,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
   @override
   Widget build(BuildContext context) {
-  var user = Provider.of<UserModel>(context);
+  var user = Provider.of<User>(context);
   return AppBar(
         title: Text('Reliabilty_scoring'),
         actions: <Widget>[
-          new Padding(padding: const EdgeInsets.all(10.0),
-          child: Text("Your score: "),
+          new Padding(padding: const EdgeInsets.all(20.0),
+          child: Text("Your score: "+user.reliabilityScore.toString()),
           ),
         ],
       );
