@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reliability_verification/screens/app_bar.dart';
-import 'package:reliability_verification/models/user_model.dart';
+import 'package:reliabilityverification/screens/app_bar.dart';
+import 'package:reliabilityverification/models/user_model.dart';
 import 'package:provider/provider.dart';
-import 'package:reliability_verification/screens/qr_code.dart';
+import 'package:reliabilityverification/screens/qr_code.dart';
 
 class DoctorView extends StatefulWidget {
   @override
@@ -27,50 +27,29 @@ class _DoctorViewState extends State<DoctorView>{
               ),
               CheckboxListTile(
                   title: const Text('Positif'),
-                  value: user.boolValue,
+                  value: user.checkBoxValue,
                   onChanged: (bool value) {
                     setState(() {
                       if (value){
-                        user.boolValue = true;
+                        user.setCheckBoxValue(true);
                       }else{
-                        user.boolValue = false;
+                        user.setCheckBoxValue(false);
                       }
                     });
                   },
                 ),
               CheckboxListTile(
                   title: const Text('Négatif'),
-                  value: !user.boolValue,
+                  value: !user.checkBoxValue,
                   onChanged: (bool value) {
                     setState(() {
                       if (value){
-                        user.boolValue = false;
+                        user.setCheckBoxValue(false);
                       }else{
-                        user.boolValue = true;
+                        user.setCheckBoxValue(true);
                       }
                     });
                   },
-              // child: ListView(
-              //   padding: EdgeInsets.only(left: 20, right: 20),
-              //   children: <Widget>[
-              //     Container(
-              //       height: 50,
-              //       color: Colors.redAccent,
-              //       child: const Center(
-              //       child: Text('Positif', style: TextStyle(color: Colors.black),
-              //           ),
-              //       ),
-              //     ),
-              //     Container(
-              //       height: 50,
-              //       color: Colors.greenAccent,
-              //       child: const Center(
-              //         child: Text('Négatif', style: TextStyle(color: Colors.black),
-              //           ),
-              //         ),
-              //     ),
-              //   ],
-              // ),
              ),
             RaisedButton(
                 padding: EdgeInsets.only(left: 20, right: 20),

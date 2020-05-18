@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:reliability_verification/models/user_model.dart';
+import 'package:reliabilityverification/models/user_model.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -14,7 +14,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: Text('Reliabilty_scoring'),
         actions: <Widget>[
           new Padding(padding: const EdgeInsets.all(20.0),
-          child: Text("Your score: "+user.reliabilityScore.toString()),
+          child: Text("Score: "+user.reliabilityScore.toString()),
           ),
         ],
       );

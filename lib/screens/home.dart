@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reliability_verification/screens/app_bar.dart';
-import 'package:reliability_verification/screens/doctor_verification.dart';
-import 'package:reliability_verification/models/user_model.dart';
+import 'package:reliabilityverification/screens/app_bar.dart';
+import 'package:reliabilityverification/screens/doctor_verification.dart';
+import 'package:reliabilityverification/models/user_model.dart';
 import 'package:provider/provider.dart';
-import 'package:reliability_verification/screens/user_declarations.dart';
+import 'package:reliabilityverification/screens/user_declarations.dart';
 
 class ChoicesView extends StatefulWidget {
   @override
@@ -11,9 +11,11 @@ class ChoicesView extends StatefulWidget {
 }
 
 class _ChoicesViewState extends State<ChoicesView>{
+
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
+
     return Scaffold(
     appBar: MyAppBar(),
     body: Container(
@@ -27,7 +29,7 @@ class _ChoicesViewState extends State<ChoicesView>{
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => QRViewExample())
+                          MaterialPageRoute(builder: (context) => DoctorScan())
                         );
                       },
                   ),

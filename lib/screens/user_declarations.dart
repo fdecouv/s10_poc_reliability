@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reliability_verification/screens/app_bar.dart';
-import 'package:reliability_verification/screens/symptom.dart';
+import 'package:reliabilityverification/screens/app_bar.dart';
+import 'package:reliabilityverification/screens/symptom.dart';
+import 'package:reliabilityverification/screens/user_test_declaration.dart';
 
 class UserDeclarationView extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _UserDeclarationViewState extends State<UserDeclarationView>{
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SymptomView())
+                          MaterialPageRoute(builder: (context) => UserTestView())
                         );
                       },
                   ),

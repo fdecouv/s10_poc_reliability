@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:reliability_verification/models/user_model.dart';
+import 'package:reliabilityverification/models/user_model.dart';
 import 'package:provider/provider.dart';
-import 'package:reliability_verification/screens/app_bar.dart';
-import 'package:reliability_verification/screens/home.dart';
+import 'package:reliabilityverification/screens/app_bar.dart';
+import 'package:reliabilityverification/screens/home.dart';
 
 class SymptomView extends StatefulWidget {
   @override
@@ -13,6 +15,29 @@ class _SymptomViewState extends State<SymptomView>{
   @override
   Widget build(BuildContext context){
     var user = Provider.of<User>(context);
+
+    showAlertDialog(BuildContext context) {
+
+        Widget okButton = FlatButton(
+          child: Text("OK"),
+          onPressed: () {Navigator.pop(context); },
+        );
+
+        AlertDialog alert = AlertDialog(
+          title: Text("Oups"),
+          content: Text("Vous vous êtes déjà déclaré infecté."),
+          actions: [
+            okButton,
+          ],
+        );
+
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+    }
     return Scaffold(
       appBar: MyAppBar(),
       body: Container(
@@ -31,7 +56,12 @@ class _SymptomViewState extends State<SymptomView>{
                   RaisedButton(
                     child: Text("Oui j'atteste avoir au moins un de ces symptômes"),
                       onPressed: () {
-                        user.setReliabilityScore(50);
+                        if(user.hasClicked == true){
+                          showAlertDialog(context);
+                        }else{
+                          user.setReliabilityScore(50);
+                          user.setHasClicked(true);
+                        }
                       },
                   ),
                   RaisedButton(

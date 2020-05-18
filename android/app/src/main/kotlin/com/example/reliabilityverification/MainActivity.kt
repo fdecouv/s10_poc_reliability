@@ -1,4 +1,4 @@
-package com.example.reliability_verification
+package com.example.reliabilityverification
 
 import io.flutter.embedding.android.FlutterActivity
 

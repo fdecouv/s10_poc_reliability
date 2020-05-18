@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reliability_verification/screens/home.dart';
-import 'package:reliability_verification/models/user_model.dart';
+import 'package:reliabilityverification/screens/home.dart';
+import 'package:reliabilityverification/models/user_model.dart';
 
 
 void main() {
