@@ -1,16 +1,58 @@
 # reliabilityverification
 
-A new Flutter project.
+L'application Covid-19 se basera sur la bonne volonté des gens pour s'auto signaler ou signaler (pour le personnels soignants) des personnes infectées ou non.
+Le problème est de savoir si ce signalement est fiable ou non.
+Pour cela je propose un système de scoring du signalement. Plus le signalement à un score proche de 100 plus il est fiable. 
+Par exemple un médecin déclarant un patient X contaminé aura une déclaration 100% fiable pour le système (le médecin et le personnel soignant sont considérés comme des signaleurs extrèmement fiables). 
+A contrario un utilisateur Y se déclare infecté sur la base des symptômes qu'il ressent, sans s'être fait testé, aura un signalement avec un score plus faible.
 
-## Getting Started
+## Diagramme d'activité
 
-This project is a starting point for a Flutter application.
+![alt diagram](https://github.com/fdecouv/s10_poc_reliability/blob/master/assets/images/diagramme_activite_score_reliability_calcul.png)
 
-A few resources to get you started if this is your first Flutter project:
+## Fonctionnement
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+#### L'utilisateur est médecin
+Il prouve qu'il est médecin en scannant un QRCode que seul les médecins et personnels soignants auront (on peut imaginer que c'est le gouvernement qui le leur est envoyé)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Ensuite il indique à l'application quel est le résultat du test du patient qu'il vient d'obtenir.
+
+Il génère un QRCode qui contient les informations de ce résultat de test covid.
+
+Le patient scan ce QRCode avec son application. 
+
+L'application enregistre cette information qui est à 100% fiable (score de 100).
+
+#### L'utilisateur n'est pas médecin
+> Il a deux choix
+>> L'utilisateur possède un test
+>>
+>> L'utilisateur entre le n° de série du test (on imagine que les fabricants de test on transmisent toutes ces informations au gouvernement).
+>>
+>> Le Sytème vérifie que le test existe bien.
+>>
+>> Une fois la vérification faite l'utilisateur indique le résultat de ce test
+>>
+>> Il a le choix de finaliser le signalement tout de suite ou de faire valider le résultat
+>>
+>>> Il choisi de finaliser tout de suite le signalement
+>>>
+>>>> Le signalement obtient un score de 75. (Il a prouvé qu'il été bien en possesion d'un test mais le résultat n'est pas vérifié)
+>>>
+>>> Il choisi de faire vérifier sont test
+>>>
+>>>> Il upload alors le résultat dans l'application
+>>>>
+>>>> L'application check le résultat (ici une détection du texte présent sur la photo, si le mot "positif" ou "négatif" est détecté alors la vérification est OK, sinon KO). 
+>>>>
+>>>> Si résultat OK, le signalement obtient un score de 100. (le test est vérifié et le résultat aussi). Sinon le signalement garde son score de 75.
+>>>>
+>>>> On peut imaginer de remplacer cette détection de texte par une detection d'image (plus cohérente avec un test sur lequel le résultat s'affiche dessus, comme un test de grossese).
+
+>> L'utilisateur ne possède pas de test
+>>
+>>> Il est dirigé sur une vue où les symptômes du virus sont rappelés
+>>>
+>>> Après consultation des symptômes il est amené à valider ou non son signalement
+>>>
+>>> Ce signalement aura un score de 50. Rien ne prouve qu'il dit vrai.
