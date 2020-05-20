@@ -25,7 +25,7 @@ L'application enregistre cette information qui est à 100% fiable (score de 100)
 
 #### L'utilisateur n'est pas médecin
 > Il a deux choix
->> L'utilisateur possède un test
+>> **L'utilisateur possède un test**
 >>
 >> L'utilisateur entre le n° de série du test (on imagine que les fabricants de test on transmisent toutes ces informations au gouvernement).
 >>
@@ -35,13 +35,13 @@ L'application enregistre cette information qui est à 100% fiable (score de 100)
 >>
 >> Il a le choix de finaliser le signalement tout de suite ou de faire valider le résultat
 >>
->>> Il choisi de finaliser tout de suite le signalement
+>>> **Il choisi de finaliser tout de suite le signalement**
 >>>
 >>>> Le signalement obtient un score de 75. (Il a prouvé qu'il été bien en possesion d'un test mais le résultat n'est pas vérifié)
 >>>
->>> Il choisi de faire vérifier sont test
+>>> **Il choisi de faire vérifier sont test**
 >>>
->>>> Il upload alors le résultat dans l'application
+>>>> **Il upload alors le résultat dans l'application**
 >>>>
 >>>> L'application check le résultat (ici une détection du texte présent sur la photo, si le mot "positif" ou "négatif" est détecté alors la vérification est OK, sinon KO). 
 >>>>
@@ -49,7 +49,7 @@ L'application enregistre cette information qui est à 100% fiable (score de 100)
 >>>>
 >>>> On peut imaginer de remplacer cette détection de texte par une detection d'image (plus cohérente avec un test sur lequel le résultat s'affiche dessus, comme un test de grossese).
 
->> L'utilisateur ne possède pas de test
+>> **L'utilisateur ne possède pas de test**
 >>
 >>> Il est dirigé sur une vue où les symptômes du virus sont rappelés
 >>>
