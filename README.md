@@ -11,7 +11,7 @@ L'application peut être lancé en exécutant le fichier app.apk situé à la ra
 
 OU
 
-En clonant le repo et en exécutant le projet avec un ide accompagner d'un émulateur.
+En clonant le repo et en exécutant le projet avec un ide accompagné d'un émulateur.
 
 ### Tests
 L'application a été testé sur un Huawei P8 lite et sur un émulateur android API R Google Pixel 2.
