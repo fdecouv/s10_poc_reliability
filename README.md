@@ -6,6 +6,23 @@ Pour cela je propose un système de scoring du signalement. Plus le signalement 
 Par exemple un médecin déclarant un patient X contaminé aura une déclaration 100% fiable pour le système (le médecin et le personnel soignant sont considérés comme des signaleurs extrèmement fiables). 
 A contrario un utilisateur Y se déclare infecté sur la base des symptômes qu'il ressent, sans s'être fait testé, aura un signalement avec un score plus faible.
 
+### Execution
+L'application peut être lancé en exécutant le fichier app.apk situé à la racine du projet, coller au préalable sur le téléphone ou émulateur avec ca signature app.apk.sha1.
+
+OU
+
+En clonant le repo et en exécutant le projet avec un ide accompagner d'un émulateur.
+
+### Tests
+L'application a été testé sur un Huawei P8 lite et sur un émulateur android API R Google Pixel 2.
+
+La détection de text a été testé avec les images suivantes (placées ici https://github.com/fdecouv/s10_poc_reliability/blob/master/assets/images/):
+![alt test-1](https://github.com/fdecouv/s10_poc_reliability/blob/master/assets/images/test-1.jpg?raw=true)
+
+![alt test-2](https://github.com/fdecouv/s10_poc_reliability/blob/master/assets/images/test-2.jpg?raw=true)
+
+![alt test-3](https://github.com/fdecouv/s10_poc_reliability/blob/master/assets/images/test-3.jpg?raw=true)
+
 ## Diagramme d'activité
 
 ![alt diagram](https://github.com/fdecouv/s10_poc_reliability/blob/master/assets/images/diagramme_activite_score_reliability_calcul.png)
