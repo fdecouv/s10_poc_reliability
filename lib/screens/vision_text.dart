@@ -59,7 +59,6 @@ class _VisionTextWidgetState extends State<VisionTextWidget> {
 
   Widget _buildImage() {
     return SizedBox(
-      height: 250.0,
       child: Center(
         child: _file == null
             ? Text('No Image')
@@ -89,7 +88,6 @@ class _VisionTextWidgetState extends State<VisionTextWidget> {
   }
 
   Widget _buildBody() {
-    var user = Provider.of<User>(context);
     return Container(
       child: Column(
         children: <Widget>[
