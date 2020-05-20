@@ -10,42 +10,37 @@ class ChoicesView extends StatefulWidget {
   _ChoicesViewState createState() => _ChoicesViewState();
 }
 
-class _ChoicesViewState extends State<ChoicesView>{
-
+class _ChoicesViewState extends State<ChoicesView> {
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<User>(context);
-
     return Scaffold(
-    appBar: MyAppBar(),
-    body: Container(
+        appBar: MyAppBar(),
+        body: Container(
             alignment: Alignment.center,
             child: FractionallySizedBox(
               heightFactor: 0.3,
-                child: Column(             
-                  children: <Widget>[
+              child: Column(
+                children: <Widget>[
                   RaisedButton(
                     child: Text("Je suis médecin"),
-                      onPressed: () {
-                        Navigator.push(
+                    onPressed: () {
+                      Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DoctorScan())
-                        );
-                      },
+                          MaterialPageRoute(
+                              builder: (context) => DoctorScan()));
+                    },
                   ),
                   RaisedButton(
                     child: Text("Je suis utilisateur"),
                     onPressed: () {
-                        Navigator.push(
+                      Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => UserDeclarationView())
-                        );
-                      },
+                          MaterialPageRoute(
+                              builder: (context) => UserDeclarationView()));
+                    },
                   ),
                 ],
-              ),  
-            )
-        )
-    );
+              ),
+            )));
   }
 }

@@ -8,39 +8,38 @@ class UserDeclarationView extends StatefulWidget {
   _UserDeclarationViewState createState() => _UserDeclarationViewState();
 }
 
-class _UserDeclarationViewState extends State<UserDeclarationView>{
+class _UserDeclarationViewState extends State<UserDeclarationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: MyAppBar(),
-    body: Container(
+        appBar: MyAppBar(),
+        body: Container(
             alignment: Alignment.center,
             child: FractionallySizedBox(
               heightFactor: 0.3,
-                child: Column(             
-                  children: <Widget>[
+              child: Column(
+                children: <Widget>[
                   RaisedButton(
                     child: Text("Je suis infecté (j'ai le résultat d'un test)"),
-                      onPressed: () {
-                        Navigator.push(
+                    onPressed: () {
+                      Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => UserTestView())
-                        );
-                      },
+                          MaterialPageRoute(
+                              builder: (context) => UserTestView()));
+                    },
                   ),
                   RaisedButton(
-                    child: Text("Je pense être infecté (mais je n'ai pas de test)"),
+                    child: Text(
+                        "Je pense être infecté (mais je n'ai pas de test)"),
                     onPressed: () {
-                        Navigator.push(
+                      Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SymptomView())
-                        );
-                      },
+                          MaterialPageRoute(
+                              builder: (context) => SymptomView()));
+                    },
                   ),
                 ],
-              ),  
-            )
-        )
-    );
+              ),
+            )));
   }
 }

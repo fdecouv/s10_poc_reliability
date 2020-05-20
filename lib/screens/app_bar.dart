@@ -7,16 +7,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize {
     return new Size.fromHeight(59.0);
   }
+
   @override
   Widget build(BuildContext context) {
-  var user = Provider.of<User>(context);
-  return AppBar(
-        title: Text('Reliabilty_scoring'),
-        actions: <Widget>[
-          new Padding(padding: const EdgeInsets.all(20.0),
-          child: Text("Score: "+user.reliabilityScore.toString()),
-          ),
-        ],
-      );
+    var user = Provider.of<User>(context);
+    return AppBar(
+      title: Text('Reliabilty_scoring'),
+      actions: <Widget>[
+        new Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text("Score: " + user.reliabilityScore.toString()),
+        ),
+      ],
+    );
   }
 }

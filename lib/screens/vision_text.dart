@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mlkit/mlkit.dart';
 import 'package:reliabilityverification/screens/app_bar.dart';
 import 'package:reliabilityverification/models/user_model.dart';
+import 'package:reliabilityverification/screens/home.dart';
 
 class VisionTextWidget extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class VisionTextWidget extends StatefulWidget {
 class _VisionTextWidgetState extends State<VisionTextWidget> {
   File _file;
   List<VisionText> _currentLabels = <VisionText>[];
-  
+
   FirebaseVisionTextDetector detector = FirebaseVisionTextDetector.instance;
 
   @override
@@ -25,43 +26,40 @@ class _VisionTextWidgetState extends State<VisionTextWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: MyAppBar(),
-        body: _buildBody(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            try {
-              //var file = await ImagePicker.pickImage(source: ImageSource.camera);
-              var file =
-                  await ImagePicker.pickImage(source: ImageSource.gallery);
-              if (file != null) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: MyAppBar(),
+      body: _buildBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          try {
+            //var file = await ImagePicker.pickImage(source: ImageSource.camera);
+            var file = await ImagePicker.pickImage(source: ImageSource.gallery);
+            if (file != null) {
+              setState(() {
+                _file = file;
+              });
+              try {
+                var currentLabels = await detector.detectFromPath(_file?.path);
                 setState(() {
-                  _file = file;
+                  _currentLabels = currentLabels;
                 });
-                try {
-                  var currentLabels =
-                      await detector.detectFromPath(_file?.path);
-                  setState(() {
-                    _currentLabels = currentLabels;
-                  });
-                } catch (e) {
-                  print(e.toString());
-                }
+              } catch (e) {
+                print(e.toString());
               }
-            } catch (e) {
-              print(e.toString());
             }
-          },
-          child: Icon(Icons.add_a_photo),
-        ),
+          } catch (e) {
+            print(e.toString());
+          }
+        },
+        child: Icon(Icons.add_a_photo),
       ),
     );
   }
 
   Widget _buildImage() {
     return SizedBox(
-      height: 500.0,
+      height: 250.0,
       child: Center(
         child: _file == null
             ? Text('No Image')
@@ -91,9 +89,34 @@ class _VisionTextWidgetState extends State<VisionTextWidget> {
   }
 
   Widget _buildBody() {
+    var user = Provider.of<User>(context);
     return Container(
       child: Column(
         children: <Widget>[
+          Text(
+            "Merci de nous envoyer le résultat de votre test",
+            style: TextStyle(
+              height: 2,
+              fontSize: 15,
+            ),
+          ),
+          _file != null
+              ? AlertDialog(
+                  title: Text("Merci"),
+                  content: Text("Votre résultat a bien été vérifié"),
+                  actions: [
+                    FlatButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChoicesView()));
+                      },
+                    ),
+                  ],
+                )
+              : Text(""),
           _buildImage(),
           _buildList(_currentLabels),
         ],
@@ -124,15 +147,17 @@ class _VisionTextWidgetState extends State<VisionTextWidget> {
     bool equalsIgnoreCase(String string1, String string2) {
       return string1?.toLowerCase() == string2?.toLowerCase();
     }
-    
-    if(equalsIgnoreCase(text, positive) == true || equalsIgnoreCase(text, negative)){
+
+    if (equalsIgnoreCase(text, positive) == true ||
+        equalsIgnoreCase(text, negative)) {
+      user.setDetectTextValue(true);
       user.setReliabilityScore(100);
       return ListTile(
         title: Text(
           "Detection test result OK: ${text}\nLa vérification est OK",
         ),
       );
-    }else{
+    } else {
       return ListTile(
         title: Text(
           "Detection test result KO: ${text}\nLa vérification a échoué",

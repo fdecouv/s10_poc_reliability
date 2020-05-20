@@ -4,7 +4,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reliabilityverification/screens/app_bar.dart';
-import 'package:reliabilityverification/models/user_model.dart';
 import 'package:reliabilityverification/screens/doctor_view.dart';
 import 'package:reliabilityverification/screens/home.dart';
 
@@ -66,36 +65,36 @@ class __DoctorScanState extends State<DoctorScan> {
                 subtitle: Text(scanResult.formatNote ?? ""),
               ),
               RaisedButton(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                "Simuler réussite du scan"),
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DoctorView())
-                  );
+                child: Text("Simuler réussite du scan"),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DoctorView()));
                 },
               ),
               RaisedButton(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                "Retour"),
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChoicesView())
-                  );
+                child: Text("Retour"),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ChoicesView()));
                 },
               ),
             ],
           ),
         ),
-        RaisedButton(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            "Scanner le QRCode"),
-            onPressed: scan,
+      Text(
+        "Doctor verification",
+        style: TextStyle(
+          height: 2,
+          fontSize: 25,
         ),
+      ),
+      Text(
+          "Merci de scanner le QRCode que le gouvernement vous a envoyé\nafin de valider votre statut de médecin"),
+      RaisedButton(
+        padding: const EdgeInsets.all(10.0),
+        child: Text("Scanner le QRCode"),
+        onPressed: scan,
+      ),
       ListTile(
         title: Text("Camera selection"),
         dense: true,
@@ -118,16 +117,13 @@ class __DoctorScanState extends State<DoctorScan> {
       ));
     }
 
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: MyAppBar(),
-        body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          children: contentList,
-        ),
+    return Scaffold(
+      appBar: MyAppBar(),
+      body: ListView(
+        padding: const EdgeInsets.all(10.0),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        children: contentList,
       ),
     );
   }

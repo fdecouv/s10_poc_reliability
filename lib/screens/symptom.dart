@@ -11,33 +11,36 @@ class SymptomView extends StatefulWidget {
   _SymptomViewState createState() => _SymptomViewState();
 }
 
-class _SymptomViewState extends State<SymptomView>{
+class _SymptomViewState extends State<SymptomView> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
 
-    showAlertDialog(BuildContext context) {
+    showAlertDialog(BuildContext context, String title, String text) {
+      Widget okButton = FlatButton(
+        child: Text("OK"),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ChoicesView()));
+        },
+      );
 
-        Widget okButton = FlatButton(
-          child: Text("OK"),
-          onPressed: () {Navigator.pop(context); },
-        );
+      AlertDialog alert = AlertDialog(
+        title: Text(title),
+        content: Text(text),
+        actions: [
+          okButton,
+        ],
+      );
 
-        AlertDialog alert = AlertDialog(
-          title: Text("Oups"),
-          content: Text("Vous vous êtes déjà déclaré infecté."),
-          actions: [
-            okButton,
-          ],
-        );
-
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return alert;
-          },
-        );
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
     }
+
     return Scaffold(
       appBar: MyAppBar(),
       body: Container(
@@ -47,36 +50,39 @@ class _SymptomViewState extends State<SymptomView>{
             image: AssetImage("assets/images/symptoms.png"),
           ),
         ),
-        child:  Container(
-            alignment: Alignment.bottomCenter,
-            child: FractionallySizedBox(
-              heightFactor: 0.3,
-                child: Column(             
-                  children: <Widget>[
-                  RaisedButton(
-                    child: Text("Oui j'atteste avoir au moins un de ces symptômes"),
-                      onPressed: () {
-                        if(user.hasClicked == true){
-                          showAlertDialog(context);
-                        }else{
-                          user.setReliabilityScore(50);
-                          user.setHasClicked(true);
-                        }
-                      },
-                  ),
-                  RaisedButton(
-                    child: Text("Non, je ne pense pas"),
-                    onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChoicesView())
-                        );
-                      },
-                  ),
-                ],
-              ),  
+        child: Container(
+          alignment: Alignment.bottomCenter,
+          child: FractionallySizedBox(
+            heightFactor: 0.3,
+            child: Column(
+              children: <Widget>[
+                RaisedButton(
+                  child:
+                      Text("Oui j'atteste avoir au moins un de ces symptômes"),
+                  onPressed: () {
+                    print(user.hasClicked);
+                    if (user.hasClicked == true) {
+                      showAlertDialog(context, "Oups",
+                          "Vous vous êtes déjà déclaré infecté.");
+                    } else {
+                      showAlertDialog(context, "Merci",
+                          "Votre signalement a bien été pris en compte.");
+                      user.setReliabilityScore(50);
+                      user.setHasClicked(true);
+                    }
+                  },
+                ),
+                RaisedButton(
+                  child: Text("Non, je ne pense pas"),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChoicesView()));
+                  },
+                ),
+              ],
             ),
-      ),
+          ),
+        ),
       ),
     );
   }
